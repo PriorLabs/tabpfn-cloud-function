@@ -16,7 +16,7 @@ def main():
     
     # Save token to .env.yaml
     with open('.env.yaml', 'w') as f:
-        f.write(f"""GCS_BUCKET: "mybucket_ben_becker11"
+        f.write(f"""GCS_BUCKET: "your_bucket_name"
 USE_GCS: "true"
 USE_MOCK: "false"
 TABPFN_API_TOKEN: "{token}"
