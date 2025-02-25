@@ -11,6 +11,73 @@ TabPFN Cloud Function is built to:
 - Handle authentication and rate limiting
 - Support Google Cloud Storage for model storage and retrieval
 
+## Project Structure
+
+### Architecture Flow
+
+```
+┌─────────────────┐     ┌───────────────┐     ┌───────────────────┐     ┌───────────────┐
+│  Google Sheets  │────▶│  Apps Script  │────▶│  Cloud Function   │────▶│  Cloud Storage│
+└─────────────────┘     └───────────────┘     └───────────────────┘     └───────────────┘
+                                                        │
+                                                        ▼
+                                               ┌───────────────────┐
+                                               │   TabPFN Client   │
+                                               └───────────────────┘
+```
+
+### Directory Structure
+
+```
+cloud_function@google_apps_script/
+├── .env.example.yaml          # Example environment configuration
+├── .env.prod                  # Production environment variables
+├── .env.test                  # Test environment variables
+├── .env.yaml                  # Current environment configuration
+├── .gcloudignore              # Files to exclude from deployment
+├── .gitattributes             # Git attributes configuration
+├── .gitignore                 # Git ignore file
+├── Code.gs                    # Google Apps Script integration
+├── README.md                  # This documentation
+├── cloudbuild.example.yaml    # Example Cloud Build configuration
+├── cloudbuild.yaml            # Cloud Build configuration
+├── deploy.ps1                 # PowerShell deployment script
+├── get_token.py               # API token management utility
+├── main.py                    # Main Cloud Function entrypoint
+├── predictor.py               # Transaction prediction logic
+├── preprocessing.py           # Data preprocessing utilities
+├── requirements.txt           # Python dependencies
+├── models/                    # Model files directory
+│   ├── .gitkeep               # Placeholder for git
+│   └── tabpfn-client/         # TabPFN model directory
+│       ├── .gitkeep           # Placeholder for git
+│       ├── tabpfn_model.pkl   # Main TabPFN model
+│       └── transformers.pkl   # Model transformers
+└── tests/                     # Test suite
+    ├── TEST_RESULTS.md        # Test results documentation
+    ├── create_test_payload.py # Utility for creating test data
+    ├── test.py                # Basic test module
+    ├── test_deployed.py       # Tests for deployed function
+    ├── test_endpoint.py       # API endpoint tests
+    ├── test_function.ps1      # PowerShell test script
+    ├── test_function.py       # Function unit tests
+    ├── test_local.py          # Local function testing
+    ├── test_local_comprehensive.py # Comprehensive local tests
+    ├── test_payload.json      # Sample test payload
+    ├── test_predictor.py      # Predictor module tests
+    ├── test_preprocessing.py  # Preprocessing tests
+    ├── test_rate_limit.py     # Rate limiting tests
+    └── test_tabpfn_comprehensive.py # TabPFN model tests
+```
+
+### Component Descriptions
+
+1. **Google Sheets**: End-user interface where transactions are stored and categorized
+2. **Apps Script (Code.gs)**: Google Apps Script that creates a custom menu and handles communication with the Cloud Function
+3. **Cloud Function (main.py)**: HTTP endpoint that receives transaction data and returns predictions
+4. **Cloud Storage**: Stores TabPFN model files for the Cloud Function to access
+5. **TabPFN Client (predictor.py)**: Core ML component that categorizes transactions using the TabPFN model
+
 ## Requirements
 
 - Python 3.10
@@ -242,4 +309,4 @@ python -m test_local.py
 ## Acknowledgements
 
 - [TabPFN](https://github.com/automl/TabPFN) for the underlying classification technology
-- Google Cloud Platform for serverless infrastructure 
+- Google Cloud Platform for serverless infrastructure
