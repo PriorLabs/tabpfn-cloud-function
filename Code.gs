@@ -1,5 +1,5 @@
 // Configuration
-const CLOUD_FUNCTION_URL = 'https://europe-west1-my-projects-406017.cloudfunctions.net/infer-category-v2';
+const CLOUD_FUNCTION_URL = 'https://your-region-your-project.cloudfunctions.net/infer-category';
 const N_FEATURES = 16; // 6 base features + 10 text embeddings
 const N_ESTIMATORS = 8; // Number of forward passes in TabPFN
 const MAX_CELLS_PER_REQUEST = 100000; // API size limitation
