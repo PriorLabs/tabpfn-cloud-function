@@ -53,21 +53,6 @@ cloud_function@google_apps_script/
 │       ├── .gitkeep           # Placeholder for git
 │       ├── tabpfn_model.pkl   # Main TabPFN model
 │       └── transformers.pkl   # Model transformers
-└── tests/                     # Test suite
-    ├── TEST_RESULTS.md        # Test results documentation
-    ├── create_test_payload.py # Utility for creating test data
-    ├── test.py                # Basic test module
-    ├── test_deployed.py       # Tests for deployed function
-    ├── test_endpoint.py       # API endpoint tests
-    ├── test_function.ps1      # PowerShell test script
-    ├── test_function.py       # Function unit tests
-    ├── test_local.py          # Local function testing
-    ├── test_local_comprehensive.py # Comprehensive local tests
-    ├── test_payload.json      # Sample test payload
-    ├── test_predictor.py      # Predictor module tests
-    ├── test_preprocessing.py  # Preprocessing tests
-    ├── test_rate_limit.py     # Rate limiting tests
-    └── test_tabpfn_comprehensive.py # TabPFN model tests
 ```
 
 ### Component Descriptions
@@ -294,17 +279,6 @@ Configure these environment variables for deployment:
 | `USE_MOCK` | Use mock predictions for testing | `true` or `false` |
 | `TABPFN_API_TOKEN` | API token for TabPFN | `your_api_token` |
 
-## Testing
-
-Run tests using:
-```
-python -m test_function.py
-```
-
-For local testing without deploying:
-```
-python -m test_local.py
-```
 
 ## Acknowledgements
 
