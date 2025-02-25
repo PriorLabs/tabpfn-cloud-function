@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+pip-log.txt
+pip-delete-this-directory.txt
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+.pytest_cache/
+.env
+<<<<<<< HEAD
+.env.*
+=======
+.env.test
+.env.prod
+>>>>>>> temp_branch
+venv/
+test_env/
+
+# Git
+.git
+.gitignore
+
+# Local development
+local/
+*.local
+test_*.py
+test_payload.json
+README.md
+deploy.ps1
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Local model files (using GCS instead)
+models/
+*.pkl 

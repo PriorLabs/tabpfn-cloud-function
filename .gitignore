@@ -1,0 +1,64 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+env/
+ENV/
+.env
+
+# Environment files (except the templates)
+.env.yaml
+.env.prod
+.env.test
+!.env.example.yaml
+
+# Local development
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Google Cloud specific
+credentials.json
+*-credentials.json
+service-account*.json
+.gcloud/
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# Models directory (if large)
+models/*.pth
+models/*.pkl
+models/*.h5
+models/tabpfn-client/*.pth
+models/tabpfn-client/*.pkl
+models/tabpfn-client/*.h5
+models/tabpfn-client/tabpfn_model.pkl
+models/tabpfn-client/transformers.pkl
+
+# Allow .gitkeep files
+!models/.gitkeep
+!models/tabpfn-client/.gitkeep 

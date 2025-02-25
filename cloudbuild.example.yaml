@@ -1,0 +1,33 @@
+steps:
+  # Enable required APIs
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+    - 'services'
+    - 'enable'
+    - 'cloudresourcemanager.googleapis.com'
+    - 'cloudfunctions.googleapis.com'
+    - 'cloudbuild.googleapis.com'
+
+  # Deploy directly to Cloud Functions
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+    - 'functions'
+    - 'deploy'
+    - 'infer-category'  # Your function name
+    - '--gen2'
+    - '--region=your-region'  # e.g., europe-west1
+    - '--runtime=python310'
+    - '--source=.'
+    - '--entry-point=infer_category'
+    - '--trigger-http'
+    - '--memory=2048MB'
+    - '--timeout=540s'
+    - '--min-instances=0'
+    - '--max-instances=10'
+    - '--service-account=${_SERVICE_ACCOUNT}'
+    - '--set-env-vars=GCS_BUCKET=your-bucket-name,USE_GCS=true,USE_MOCK=false,TABPFN_API_TOKEN=your-api-token'
+
+substitutions:
+  _SERVICE_ACCOUNT: 'your-service-account@your-project-id.iam.gserviceaccount.com'  # Replace with your service account 
