@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 load_dotenv()
 
 # Constants for GCS
-GCS_BUCKET = os.getenv('GCS_BUCKET', 'mybucket_ben_becker11')
+GCS_BUCKET = os.getenv('GCS_BUCKET', 'your-bucket-name')
 MODEL_PATH = "models/tabpfn-client"
 
 # Global predictor instance
