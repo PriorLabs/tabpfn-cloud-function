@@ -33,6 +33,10 @@ ENV/
 .env.test
 !.env.example.yaml
 
+# Cloud build configuration files with sensitive data
+cloudbuild.yaml
+!cloudbuild.example.yaml
+
 # Local development
 .idea/
 .vscode/

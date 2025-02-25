@@ -23,7 +23,8 @@ try {
 
     # Get the function URL
     Write-Host "Getting function URL..."
-    $url = gcloud functions describe infer-category --region=europe-west1 --format="value(serviceConfig.uri)"
+    # Replace 'your-region' with your actual GCP region (e.g., 'us-central1', 'europe-west1')
+    $url = gcloud functions describe infer-category --region=your-region --format="value(serviceConfig.uri)"
     
     Write-Host "Deployment completed successfully!"
     Write-Host "Function URL: $url"
