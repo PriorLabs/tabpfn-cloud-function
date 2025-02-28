@@ -2,6 +2,8 @@
 
 This repository contains a Google Cloud Function that runs TabPFN classification models to categorize transactions. It's designed to work with Google Sheets data and provides a simple API for classification tasks.
 
+> **Note**: This is a fork of [belalanne/tabpfn-cloud-function](https://github.com/belalanne/tabpfn-cloud-function). All credit for the original implementation goes to the original author.
+
 
 https://github.com/user-attachments/assets/811e2d33-9e8b-4b42-85ea-90bb27cc3cfe
 
