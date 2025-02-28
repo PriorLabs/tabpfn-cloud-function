@@ -285,6 +285,84 @@ Configure these environment variables for deployment:
 | `USE_MOCK` | Use mock predictions for testing | `true` or `false` |
 | `TABPFN_API_TOKEN` | API token for TabPFN | `your_api_token` |
 
+## Developer Workflow
+
+This section covers the recommended workflow for quick development and testing.
+
+### Local Development 
+
+For the fastest iteration cycle:
+
+1. Set up your local environment:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   pip install -r requirements.txt
+   ```
+
+2. Create a local `.env` file with testing settings:
+   ```
+   USE_GCS=false
+   USE_MOCK=true
+   TABPFN_API_TOKEN=your_api_token_here
+   ```
+
+3. Run the local test server:
+   ```bash
+   python test_locally.py
+   ```
+
+4. Visit http://localhost:8080/send_test in your browser to test the function with sample data
+
+5. For real-time code changes, run the function with automatic reloading:
+   ```bash
+   python -m functions_framework --target infer_category --debug
+   ```
+
+### Test-Driven Development
+
+Use the included test suite for reliable development:
+
+1. Run all tests:
+   ```bash
+   python -m unittest discover tests
+   ```
+
+2. Run a specific test:
+   ```bash
+   python -m unittest tests.test_predictor.TestPredictor.test_mock_predict
+   ```
+
+3. Add tests for new features before implementing them
+
+### Deploy and Test in Cloud
+
+After local testing, deploy to GCP:
+
+1. Edit `.env.yaml` with your production settings
+2. Run the deployment script:
+   ```bash
+   ./deploy.ps1  # On PowerShell
+   ```
+
+3. Test the deployed function with the generated test payload:
+   ```bash
+   curl -X POST [FUNCTION_URL] -H 'Content-Type: application/json' -d @test_payload.json
+   ```
+
+### Google Sheets Integration
+
+For testing with Google Sheets:
+
+1. Create a new Google Sheet
+2. Open Extensions > Apps Script
+3. Paste the contents of `Code.gs` into the script editor
+4. Update the `CLOUD_FUNCTION_URL` to your deployed function URL
+5. Save and run the script
+6. Create a sheet with columns for `dateOp`, `transaction_description`, and `amount`
+7. Add sample transaction data
+8. Use the new "Transaction Categories" menu to test predictions
+
 
 ## Acknowledgements
 
