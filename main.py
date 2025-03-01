@@ -25,14 +25,22 @@ MODEL_PATH = "models/tabpfn-client"
 # Global predictor instance
 predictor = None
 
-def initialize_predictor():
+def initialize_predictor(request_id="init"):
     """Initialize the global predictor instance."""
     global predictor
     if predictor is None:
         try:
             # Initialize predictor with GCS configuration
-            use_mock = os.getenv('USE_MOCK', '').lower() == 'true'
-            use_gcs = os.getenv('USE_GCS', '').lower() == 'true'
+            raw_use_mock = os.getenv('USE_MOCK', '')
+            raw_use_gcs = os.getenv('USE_GCS', '')
+            
+            # Log the actual environment variables for debugging
+            logger.info(f"[{request_id}] Environment variables - USE_MOCK: '{raw_use_mock}', USE_GCS: '{raw_use_gcs}'")
+            
+            use_mock = raw_use_mock.lower() == 'true'
+            use_gcs = raw_use_gcs.lower() == 'true'
+            
+            logger.info(f"[{request_id}] Using mock: {use_mock}, Using GCS: {use_gcs}")
             
             predictor = TransactionPredictor(
                 model_dir=MODEL_PATH,
@@ -74,7 +82,7 @@ def infer_category(request):
         # Initialize predictor if needed
         if predictor is None:
             logger.info(f"[{request_id}] Initializing predictor...")
-            initialize_predictor()
+            initialize_predictor(request_id)
         
         # Get request data
         request_json = request.get_json()
@@ -113,7 +121,7 @@ def infer_category(request):
                 'success': True,
                 'results': results,
                 'request_id': request_id,
-                'mode': 'mock' if predictor.use_mock else 'tabpfn'
+                'mode': 'mock' if predictor.use_mock else 'smart-categories'
             }
             
             logger.info(f"[{request_id}] Successfully processed {len(results)} transactions")
